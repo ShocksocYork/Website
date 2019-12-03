@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width">
+    <meta name="description" content="The official Shocksoc website">
+    <meta name="author" content="Joe Butler (University of York Electronics society 2019)">
+    <title>Shocksoc | About</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+          <img src="img/Banner/logo_white.png" alt="Shocksoc logo" width="400px" height="135px">
+        </a>
+        </div>
+        <div class="socialmedia">
+          <a href="https://www.facebook.com/ShockSoc/">
+            <img src="img/social/facebook.png" alt="facebook" width="35" height="37">
+          </a>
+          <a href="https://twitter.com/uoy_shocksoc?lang=en-gb">
+            <img src="img/social/twitter.png" alt="twitter" width="35" height="37">
+          </a>
+          <a href="https://yusu.org/activities/view/shocksoc">
+            <img src="img/social/yusu.png" alt="yusu" width="40" height="40">
+          </a>
+          <a href="https://www.york.ac.uk/electronic-engineering/">
+            <img src="img/social/uniofyork.png" alt="uniofyork" width="40" height="40">
+          </a>
+          <a href="mailto:shocksocweb@gmail.com">
+            <img src="img/social/mail.png" alt="mail" width="45" height="42">
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="current"><a href="gaming.html">Gaming</a></li>
+            <li><a href="minutes.html">Minutes</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="information">
+      <div class="container">
+
+        <div class="infoArticle">
+          <h2>What is shocksocs gaming section?</h2>
+          <p>A new section for 2019 that includes access to 24/7 gameservers that we think members will enjoy playing on.
+          <br>Despite the fact the gameservers are hosted by Shocksoc anyone is allowed to join/play and infact we even encourage it.
+          <br>Current plans for servers include Minecraft (Vanilla/Modded) & Factorio. These are on a kind of trial period before anything else is released.
+          <br>If you would like to apply for a staff role on one of our servers then please send us an email or contact Joe Butler (profjb).
+          <h3 style="background:url(img/Gaming/discord.png);color:#26292F;">Discord (voice & text chat)</h3>
+          <p>Discord is a platform that allows you to communicate over voice/text chat in discrete channels.
+          <br>These channels include those dedicated to coursework, gaming, memes etc... To join fill in the discord request form on the front of the site.</p>
+
+          <h3 style="background:url(img/Gaming/factorio.jpg)">Factorio</h3>
+          <h4 style="font-size:20px;color:white"><b><u style="color:#6fdc6f">Server i.p:</u> 92.118.16.82:34200</b></h4>
+
+          <h3 style="background:url(img/Gaming/minecraft.png)">Minecraft (Vanilla)</h3>
+          <span style="color:white">As of 19/10/19 the server is no longer whitelisted. Anyone is free to join.</span>
+          <h4 style="font-size:20px;color:white"><b><u style="color:#6fdc6f">Server i.p:</u> mc.shocksoc.org</b></h4>
+          <span> <b>Server status: </b></span><span id="serverStatus" style="color:#DF3E3E">Cannot retrieve server status...</span>
+          <span> <br><b>Version: </b></span><span id="serverVersion"></span>
+          <span> <br><b>Player count: </b></span><span id="serverPlayerCount" ></span>
+          <span> <b>/ </b></span><span id="serverPlayerMax" ></span>
+          <span> <br><b>Players online: </b></span><span id="playersOnline"></span>
+
+          <script>
+            $.getJSON('https://api.mcsrvstat.us/2/mc.shocksoc.org', function(status) {
+	             //Show the version
+               if(status.online == true){
+                 document.getElementById('serverStatus').textContent = "online"
+                 document.getElementById('serverStatus').style.color = "white"
+                 document.getElementById('serverVersion').textContent = status.version
+                 document.getElementById('serverVersion').style.color = "white"
+                 document.getElementById('serverPlayerCount').textContent = status.players.online
+                 document.getElementById('serverPlayerCount').style.color = "white"
+                 document.getElementById('serverPlayerMax').textContent = status.players.max
+                 document.getElementById('serverPlayerMax').style.color = "white"
+                 document.getElementById('playersOnline').style.color = "white"
+               } else {
+                 document.getElementById('serverStatus').textContent = "offline"
+                 document.getElementById('serverStatus').style.color = "#DF3E3E"
+               }
+
+               var playersOnline = document.getElementById('playersOnline')
+	               //Show a list of players
+	                $.each(status.players.list, function(index, player){
+                    playersOnline.insertAdjacentHTML( 'beforeend', player + ", ");
+                   });
+              });
+
+          </script>
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>Shocksoc (University of York Electronics society), Copyright &copy; 2019</p>
+        <a id="privacy" href="privacypolicy.html">Privacy Policy</a>
+        <span style="font-size:11px"> <br>Site Creator: Joe Butler (jb2200@york.ac.uk)</span>
+      </div>
+    </footer>
+
+	</body>
+</html>
